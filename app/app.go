@@ -20,7 +20,7 @@ func Init(appRoot string) *gin.Engine {
 	router.Init(engine)
 
 	// 启动Gin，并监听8081端口
-	engine.Run("0.0.0.0:8081")
+	engine.Run(":8080")
 
 	return engine
 }

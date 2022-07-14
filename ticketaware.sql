@@ -1,0 +1,1 @@
+create table ta_users(id int AUTO_INCREMENT not null primary key, username varchar(255) not null, password varchar(255) not null, ip varchar(255) not null, balance int not null);

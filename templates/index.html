@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/materialize.min.css">
+    <link rel="stylesheet" href="../assets/css/materialize-admin.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../assets/css/materialize.css">
     <title>{{.appName}}</title>
 </head>
 <body>
+    <style>
+        .index_container {
+            width: 100%;
+            height: 700px;
+            background: url(/assets/images/1.png) no-repeat center 0px;
+            background-size: cover;
+        }
+    </style>
     <nav>
 		<div class="nav-wrapper blue lighten-1">
 		  <a href="/" class="brand-logo" style="padding-left: 20px;"><i class="material-icons">cloud</i>TicketAware</a>
@@ -15,5 +27,62 @@
 		  </ul>
 		</div>
 	  </nav>
+
+      <div class="index_container">
+        <div class="container" style="padding-top: 130px;">
+            <div class="row">
+                <div class="col s12 l8 offset-l2">
+                    <div class="card card-login">
+                        <div class="card-content" style="padding: 40px;">
+                        <div class="flow-text center-align" style="padding-bottom: 25px;">查询机票</div>
+                        <div class="row">
+                            <form class="col s12">
+                              <div class="row">
+                                <div class="input-field col s6">
+                                  <input placeholder="出发城市" id="start_place" type="text" class="validate">
+                                  <label for="start_place">出发城市</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="到达城市" id="stop_place" type="text" class="validate">
+                                    <label for="stop_place">到达城市</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="date" class="datepicker">
+                                    <label for="start_time">出发日期</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <a class="waves-effect waves-light btn" style="display:block;margin:0 auto"><i class="material-icons right">navigation</i>立刻查询</a>
+                              </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <footer class="page-footer blue">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">TicketAware</h5>
+              <p class="grey-text text-lighten-4">中国软件杯。</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container center">
+          © 2014 Copyright TicketAware
+          </div>
+        </div>
+      </footer>
+
+      <script src="/assets/js/materialize.js"></script>
+      <script src="/assets/js/materialize.min.js"></script>
 </body>
 </html>
