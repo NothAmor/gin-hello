@@ -18,6 +18,8 @@ func Init(appRoot string) *gin.Engine {
 	// 配置路由
 	router.Init(engine)
 
+	engine.Run()
+
 	return engine
 }
 
