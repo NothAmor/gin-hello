@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"petehouston.com/gin-hello/app"
+	"github.com/NothAmor/gin-hello/app"
 )
 
 func main() {

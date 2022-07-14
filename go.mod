@@ -1,4 +1,4 @@
-module petehouston.com/gin-hello
+module github.com/NothAmor/gin-hello
 
 go 1.18
 

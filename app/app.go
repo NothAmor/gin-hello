@@ -3,7 +3,7 @@ package app
 import (
 	"net/http"
 
-	"petehouston.com/gin-hello/app/router"
+	"github.com/NothAmor/gin-hello/app/router"
 
 	"github.com/gin-gonic/gin"
 )
