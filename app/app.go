@@ -10,7 +10,7 @@ import (
 
 func Init(appRoot string) *gin.Engine {
 	// 初始化Gin引擎
-	engine := gin.New()
+	engine := gin.Default()
 
 	// 初始化模版
 	loadTemplates(appRoot, engine)
@@ -18,7 +18,7 @@ func Init(appRoot string) *gin.Engine {
 	// 配置路由
 	router.Init(engine)
 
-	engine.Run()
+	engine.Run(":8081")
 
 	return engine
 }
