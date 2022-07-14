@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var root string
-	flag.StringVar(&root, "appRoot", "", "Usage: -appRoot=/www/gin-hello       Define Application main directoryapplicationRoot")
+	flag.StringVar(&root, "appRoot", "", "Usage: -appRoot=/www/gin-hello       Define Application main directory")
 	flag.Parse()
 	app.Init(root)
 }

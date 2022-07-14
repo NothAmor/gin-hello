@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/NothAmor/gin-hello/app/router"
@@ -18,7 +19,8 @@ func Init(appRoot string) *gin.Engine {
 	// 配置路由
 	router.Init(engine)
 
-	engine.Run(":8081")
+	// 启动Gin，并监听8081端口
+	engine.Run("0.0.0.0:8081")
 
 	return engine
 }
@@ -26,4 +28,5 @@ func Init(appRoot string) *gin.Engine {
 func loadTemplates(appRoot string, engine *gin.Engine) {
 	engine.StaticFS("/assets", http.Dir(appRoot+"/assets"))
 	engine.LoadHTMLGlob(appRoot + "/templates/*")
+	fmt.Println(appRoot)
 }

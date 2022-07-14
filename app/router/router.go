@@ -7,6 +7,7 @@ import (
 )
 
 func Init(engine *gin.Engine) {
+	engine.GET("/", controller.Index)
 	engine.GET("/login", controller.Login)
 	engine.GET("/register", controller.Register)
 }
