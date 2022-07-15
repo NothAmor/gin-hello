@@ -23,7 +23,11 @@
 		<div class="nav-wrapper blue lighten-1">
 		  <a href="/" class="brand-logo" style="padding-left: 20px;"><i class="material-icons">cloud</i>TicketAware</a>
 		  <ul class="right hide-on-med-and-down">
-			<li><a href="login">登陆/注册</a></li>
+        {{if .username}}
+        <li><a href="#">{{.username}}</a></li>
+        {{else}}
+        <li><a href="login">登陆/注册</a></li>
+        {{end}}
 		  </ul>
 		</div>
 	  </nav>
@@ -84,5 +88,7 @@
 
       <script src="/assets/js/materialize.js"></script>
       <script src="/assets/js/materialize.min.js"></script>
+      <script src="/assets/public/jquery/jquery-min.js"></script>
+      <script src="/assets/js/cookie.js"></script>
 </body>
 </html>

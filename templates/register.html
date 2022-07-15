@@ -9,13 +9,18 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" type="text/css" href="../assets/css/global.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/login.css">
+	<link rel="stylesheet" href="/assets/public/js-snackbar/js-snackbar.css">
 </head>
 <body>
 	<nav>
 		<div class="nav-wrapper blue lighten-1">
 		  <a href="/" class="brand-logo" style="padding-left: 20px;"><i class="material-icons">cloud</i>TicketAware</a>
 		  <ul class="right hide-on-med-and-down">
+			{{if .username}}
+			<li><a href="#">{{.username}}</a></li>
+			{{else}}
 			<li><a href="login">登陆/注册</a></li>
+			{{end}}
 		  </ul>
 		</div>
 	  </nav>
@@ -43,6 +48,11 @@
 						<form method="post" action="/user/register">
 							<div class="row">
 								<div class="input-field col s12 m12 l12">
+									<i class="material-icons prefix left">email</i>
+									<input id="email" type="text" class="validate" name="email">
+									<label for="email">邮箱</label>
+								</div>
+								<div class="input-field col s12 m12 l12">
 									<i class="material-icons prefix left">account_circle</i>
 									<input id="username" type="text" class="validate" name="username">
 									<label for="username">用户名</label>
@@ -52,13 +62,18 @@
 									<input id="password" type="password" class="validate" name="password">
 									<label for="password">密码</label>
 								</div>
+								<div class="input-field col s12 m12 l12">
+									<i class="material-icons prefix left">vpn_key</i>
+									<input id="passwordConfirm" type="password" class="validate" name="passwordConfirm">
+									<label for="passwordConfirm">确认密码</label>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col s6">
 									<a href="/login">已有账户了，去登陆</a>
 								</div>
 								<div class="col s6 right">
-									<button type="submit"  class="btn full waves-effect waves-light green darken-2"><i class="large material-icons tooltipped hide-on-med-and-up show-on-small"  data-position="bottom" data-tooltip="Log In">lock_open</i><span class="hide-on-small-only">注册</span></button>
+									<button type="button"  class="btn full waves-effect waves-light green darken-2" id="register"><i class="large material-icons tooltipped hide-on-med-and-up show-on-small"  data-position="bottom" data-tooltip="Log In">lock_open</i><span class="hide-on-small-only">注册</span></button>
 								</div>
 							</div>
 						</form>
@@ -69,6 +84,71 @@
 	</div>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-	<script type="text/javascript" src="../assets/js/global.js"></script>
+	<script src="/assets/public/js-snackbar/js-snackbar.js"></script>
+	<script src="/assets/public/jquery/jquery-min.js"></script>
+	<script src="/assets/js/cookie.js"></script>
+	<script>
+		$("#register").click(function() {
+			// 获取输入框字段
+			let email = $("#email").val();
+			let username = $("#username").val();
+			let password = $("#password").val();
+			let passwordConfirm = $("#passwordConfirm").val();
+
+			// 邮箱合法性正则表达式
+			let reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+
+			// 判断密码和确认密码是否相同
+			if(password == passwordConfirm && reg.test(email) && password.length >= 6) {
+				// 如果相同进行注册请求
+				$.ajax({
+					url: "/user/register",
+					type: "post",
+					data: {
+						"email": email,
+						"username": username,
+						"password": password
+					},
+					success: function(result) {
+						// 请求成功弹出提示框
+						if(result["code"] == 200) {
+							SnackBar({
+								position: "tc",
+								message: result["msg"],
+								status: "success"
+							});
+							setTimeout(function() {
+								window.location.href="/login";
+							}, 2000);
+						} else {
+							SnackBar({
+								position: "tc",
+								message: result["msg"],
+								status: "danger"
+							});
+						}
+					}
+				})
+			} else if(!reg.test(email)){
+				SnackBar({
+					position: "tc",
+					message: "请输入正确的邮箱！",
+					status: "danger"
+				});
+			} else if(password.length < 6){
+				SnackBar({
+					position: "tc",
+					message: "密码长度需大于6位！",
+					status: "danger"
+				});
+			} else {
+				// 两次输入密码不同，提出警示框
+				SnackBar({
+					position: "tc",
+					message: "两个密码框内密码不一致！",
+					status: "danger"
+				})
+			} });
+	</script>
 </body>
 </html>
