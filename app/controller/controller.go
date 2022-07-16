@@ -177,3 +177,15 @@ func RegisterRequest(context *gin.Context) {
 		"msg":    msg,
 	})
 }
+
+func Logout(context *gin.Context) {
+	token := context.PostForm("token")
+	username, email, ok := security.Validator(token)
+	context.JSON(http.StatusOK, gin.H{
+		"code":     200,
+		"msg":      "登出成功",
+		"username": username,
+		"email":    email,
+		"ok":       ok,
+	})
+}

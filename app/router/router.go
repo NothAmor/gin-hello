@@ -13,4 +13,5 @@ func Init(engine *gin.Engine) {
 
 	engine.POST("/user/login", controller.LoginRequest)
 	engine.POST("/user/register", controller.RegisterRequest)
+	engine.POST("/user/logout", controller.Logout)
 }

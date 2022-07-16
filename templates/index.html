@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/materialize.min.css">
-    <link rel="stylesheet" href="../assets/css/materialize-admin.min.css">
+    <link rel="stylesheet" href="/assets/public/materialze/css/materialize.css">
+    <link rel="stylesheet" href="/assets/css/materialize-admin.min.css">
+    <link rel="stylesheet" href="/assets/public/materialze/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../assets/css/materialize.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/public/js-snackbar/js-snackbar.css">
     <title>{{.appName}}</title>
 </head>
 <body>
+    <script src="/assets/public/jquery/jquery-min.js"></script>
     <style>
-        .index_container {
-            width: 100%;
-            height: 700px;
-            background: url(/assets/images/1.png) no-repeat center 0px;
-            background-size: cover;
+        .parallax-container {
+          background: url(/assets/images/1.png) no-repeat center 0px;
+          background-size: cover;
+          height: 700px;
+          width: 100%;
         }
     </style>
     <nav>
@@ -24,7 +27,14 @@
 		  <a href="/" class="brand-logo" style="padding-left: 20px;"><i class="material-icons">cloud</i>TicketAware</a>
 		  <ul class="right hide-on-med-and-down">
         {{if .username}}
-        <li><a href="#">{{.username}}</a></li>
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-button btn' href='#' data-activates='dropdown1'>{{.username}}</a>
+
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="/user/home">用户首页</a></li>
+            <li><a id="logout">退出登陆</a></li>
+          </ul>
         {{else}}
         <li><a href="login">登陆/注册</a></li>
         {{end}}
@@ -32,39 +42,36 @@
 		</div>
 	  </nav>
 
-      <div class="index_container">
-        <div class="container" style="padding-top: 130px;">
-            <div class="row">
-                <div class="col s12 l8 offset-l2">
-                    <div class="card card-login">
-                        <div class="card-content" style="padding: 40px;">
-                        <div class="flow-text center-align" style="padding-bottom: 25px;">查询机票</div>
-                        <div class="row">
-                            <form class="col s12">
-                              <div class="row">
-                                <div class="input-field col s6">
-                                  <input placeholder="出发城市" id="start_place" type="text" class="validate">
-                                  <label for="start_place">出发城市</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input placeholder="到达城市" id="stop_place" type="text" class="validate">
-                                    <label for="stop_place">到达城市</label>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                    <input type="date" class="datepicker">
-                                    <label for="start_time">出发日期</label>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                <a class="waves-effect waves-light btn" style="display:block;margin:0 auto"><i class="material-icons right">navigation</i>立刻查询</a>
-                              </div>
-                              </div>
-                            </form>
-                          </div>
+      <div class="parallax-container">
+        <div class="row" style="width: 60rem;">
+          <div class="col s12 l8 offset-l2">
+            <div class="card card-login">
+                <div class="card-content" style="padding: 40px;">
+                <div class="flow-text center-align" style="padding-bottom: 25px;">查询机票</div>
+                <div class="row">
+                    <form class="col s12">
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input placeholder="出发城市" id="start_place" type="text" class="validate">
+                            <label for="start_place">出发城市</label>
                         </div>
-                    </div>
+                        <div class="input-field col s6">
+                            <input placeholder="到达城市" id="stop_place" type="text" class="validate">
+                            <label for="stop_place">到达城市</label>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                            <input type="date" class="datepicker">
+                            <label for="start_time">出发日期</label>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <a class="waves-effect waves-light btn" style="display:block;margin:0 auto"><i class="material-icons right">navigation</i>立刻查询</a>
+                      </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
             </div>
         </div>
@@ -72,7 +79,7 @@
 
       <footer class="page-footer blue">
         <div class="container">
-          <div class="row">
+          <div class="row" style="margin-bottom: 30px;">
             <div class="col l6 s12">
               <h5 class="white-text">TicketAware</h5>
               <p class="grey-text text-lighten-4">中国软件杯。</p>
@@ -86,9 +93,47 @@
         </div>
       </footer>
 
-      <script src="/assets/js/materialize.js"></script>
-      <script src="/assets/js/materialize.min.js"></script>
-      <script src="/assets/public/jquery/jquery-min.js"></script>
+      <script src="/assets/public/materialze/js/materialize.js"></script>
+      <script src="/assets/public/materialze/js/materialize.min.js"></script>
+      <script src="/assets/public/js-snackbar/js-snackbar.js"></script>
       <script src="/assets/js/cookie.js"></script>
+      <script>
+        $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: false,
+            hover: false,
+            gutter: 0,
+            belowOrigin: false,
+            alignment: 'center'
+          }
+        );
+        $(document).ready(function(){
+          $('.parallax').parallax();
+        });
+
+        $("#logout").click(function() {
+          token = getCookie("token");
+          $.ajax({
+            url: "/user/logout",
+            method: "post",
+            data: {
+              "token": token
+            },
+            success: function(result) {
+              console.log(result);
+              SnackBar({
+                  position: "tc",
+                  message: result["msg"],
+                  status: "success"
+                });
+              document.cookie = "token=0";
+              setTimeout(function() {
+								window.location.href="/";
+							}, 2000);
+            }
+          })
+        })
+    </script>
 </body>
 </html>
