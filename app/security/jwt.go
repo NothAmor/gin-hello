@@ -38,7 +38,7 @@ func SignIn(login LoginInfo) (userInfo *models.Users, token string, ok bool) {
 	user := &models.Users{}
 	err := db.Where("email = ?", login.Email).First(user).Error
 	if err != nil {
-		panic(err)
+		ok = false
 	}
 
 	// 如果查询有数据且传入的密码md5=数据库内的md5则验证成功
@@ -58,7 +58,6 @@ func SignIn(login LoginInfo) (userInfo *models.Users, token string, ok bool) {
 		if err != nil {
 			panic(err)
 		}
-
 		ok = true
 
 		return user, stringToken, ok

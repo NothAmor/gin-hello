@@ -23,5 +23,7 @@ func InitDatabase() *gorm.DB {
 func DatabaseMigrate(db *gorm.DB, migrate bool) {
 	if migrate {
 		db.AutoMigrate(&models.Users{})
+		db.AutoMigrate(&models.Flights{})
+		db.AutoMigrate(&models.Passengers{})
 	}
 }
