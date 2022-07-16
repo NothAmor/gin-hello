@@ -17,9 +17,16 @@
 		  <a href="/" class="brand-logo" style="padding-left: 20px;"><i class="material-icons">cloud</i>TicketAware</a>
 		  <ul class="right hide-on-med-and-down">
 			{{if .username}}
-			<li><a href="#">{{.username}}</a></li>
+			<!-- Dropdown Trigger -->
+			<a class='dropdown-button btn' href='#' data-activates='dropdown1'>{{.username}}</a>
+
+			<!-- Dropdown Structure -->
+			<ul id='dropdown1' class='dropdown-content'>
+			  <li><a href="/user/home">用户首页</a></li>
+			  <li><a id="logout">退出登陆</a></li>
+			</ul>
 			{{else}}
-			<li><a href="login">登陆/注册</a></li>
+			<li><a href="/user/login">登陆/注册</a></li>
 			{{end}}
 		  </ul>
 		</div>
@@ -32,8 +39,8 @@
 						<div class="wrapper">
 							<h2 class="center flow-text">TicketAware</h2>
 							<span class="hide-on-med-and-down">
-								<a class="btn waves-effect waves-light blue darken-2" href="/login"><i class="material-icons left">check</i>登陆</a>
-								<a class="btn waves-effect waves-light green darken-2"  href="/register"><i class="material-icons left">create</i>注册</a>
+								<a class="btn waves-effect waves-light blue darken-2" href="/user/login"><i class="material-icons left">check</i>登陆</a>
+								<a class="btn waves-effect waves-light green darken-2"  href="/user/register"><i class="material-icons left">create</i>注册</a>
 							</span>
 							<span class="center hide-on-large-only show-on-medium-and-down">
 								<a class="btn tooltipped btn-floating waves-effect waves-light blue darken-2" href="#!" data-position="bottom" data-tooltip="Sign In"><i class="material-icons" >check</i></a>
@@ -60,7 +67,7 @@
 							</div>
 							<div class="row">
 								<div class="col s6">
-									<a href="/register">还没有账户，去注册</a>
+									<a href="/user/register">还没有账户，去注册</a>
 								</div>
 								<div class="col s6 right">
 									<button type="button" id="login"  class="btn full waves-effect waves-light green darken-2"><i class="large material-icons tooltipped hide-on-med-and-up show-on-small"  data-position="bottom" data-tooltip="Log In">lock_open</i><span class="hide-on-small-only">登陆</span></button>
@@ -86,7 +93,7 @@
 
 			if(reg.test(email) && password.length > 6) {
 				$.ajax({
-					url: "/user/login",
+					url: "/user/loginEntry",
 					method: "post",
 					data: {
 						"email": email,
@@ -99,7 +106,7 @@
 								message: result["msg"],
 								status: "success"
 							});
-							document.cookie = "token=" + result["token"];
+							document.cookie = "token=" + result["token"] + ";path=/";
 							setTimeout(function() {
 								window.location.href="/";
 							}, 2000);

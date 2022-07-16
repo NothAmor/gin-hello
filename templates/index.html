@@ -13,7 +13,6 @@
     <title>{{.appName}}</title>
 </head>
 <body>
-    <script src="/assets/public/jquery/jquery-min.js"></script>
     <style>
         .parallax-container {
           background: url(/assets/images/1.png) no-repeat center 0px;
@@ -36,7 +35,7 @@
             <li><a id="logout">退出登陆</a></li>
           </ul>
         {{else}}
-        <li><a href="login">登陆/注册</a></li>
+        <li><a href="/user/login">登陆/注册</a></li>
         {{end}}
 		  </ul>
 		</div>
@@ -67,7 +66,7 @@
                           </div>
                       </div>
                       <div class="row">
-                        <a class="waves-effect waves-light btn" style="display:block;margin:0 auto"><i class="material-icons right">navigation</i>立刻查询</a>
+                        <a class="btn full waves-effect waves-light green darken-2" style="display:block;margin:0 auto" id="search"><i class="material-icons right">navigation</i>立刻查询</a>
                       </div>
                       </div>
                     </form>
@@ -93,6 +92,7 @@
         </div>
       </footer>
 
+      <script src="/assets/public/jquery/jquery-min.js"></script>
       <script src="/assets/public/materialze/js/materialize.js"></script>
       <script src="/assets/public/materialze/js/materialize.min.js"></script>
       <script src="/assets/public/js-snackbar/js-snackbar.js"></script>
@@ -108,9 +108,6 @@
             alignment: 'center'
           }
         );
-        $(document).ready(function(){
-          $('.parallax').parallax();
-        });
 
         $("#logout").click(function() {
           token = getCookie("token");

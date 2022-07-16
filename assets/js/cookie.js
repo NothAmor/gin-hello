@@ -1,6 +1,6 @@
 token = getCookie("token")
 if(token == "") {
-    document.cookie = "token=0";
+    document.cookie = "token=0;path=/";
 }
 
 function getCookie(cname) {
